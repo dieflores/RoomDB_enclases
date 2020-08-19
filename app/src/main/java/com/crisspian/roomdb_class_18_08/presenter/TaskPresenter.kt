@@ -11,33 +11,32 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-class TaskPresenter(application: Application, val iView: IView): IPresenter, CoroutineScope {
+class TaskPresenter(application: Application, private val iView: IView): IPresenter , CoroutineScope {
     private val mRepository: TaskRepository
     private val allLiveDataTask : LiveData<List<Task>>
+
     private val job = Job()
-
     override val coroutineContext: CoroutineContext = job + Dispatchers.IO
-      //  get() = TODO("Not yet implemented") ((ya no vá))
 
-
-    init{
+    init {
         val taskDao = TaskDataBase.getDatabase(application).getTaskDao()
         mRepository = TaskRepository(taskDao)
-        allLiveDataTask = mRepository.mAllTaks
+        allLiveDataTask = mRepository.mAllTasks
     }
 
-    override suspend fun insertTask(task: Task): Job {
-        return launch { mRepository.insertTask(task)
-            iView.showToastMessage("Guardando")
-        }
-
-        TODO("Not yet implemented")
+    override fun insertTask(task: Task) {
+        inserTest(task)
+        iView.showToastMessage("Guardando")
     }
+
+    fun inserTest(task: Task) = launch {
+        mRepository.insertTask(task)
+    }
+
 
     override fun getAlltask() {
         iView.showAllTask(allLiveDataTask)
 
-        TODO("Not yet implemented")
     }
 
 
