@@ -9,12 +9,12 @@ import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import com.crisspian.roomdb_class_18_08.R
 import com.crisspian.roomdb_class_18_08.model.Task
-import com.crisspian.roomdb_class_18_08.presenter.TaskViewPresenter
+import com.crisspian.roomdb_class_18_08.presenter.IView
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class FirstFragment : Fragment(), TaskViewPresenter {
+class FirstFragment : Fragment(), IView {
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
